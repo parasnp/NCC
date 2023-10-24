@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container p-5">
+      <form id="frm" class="m-5">
+        <div class="mb-3">
+          <label for="bnCode" class="form-label">Battalion Code</label>
+          <input type="text" class="form-control" id="bnCode">
+          <div id="bnCodeError"></div>
+        </div>
+        <div class="mb-3">
+          <label for="bnName" class="form-label">Battalion Name</label>
+          <input type="text" class="form-control" id="bnName">
+          <div id="bnNameError"></div>
+        </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email">
+            <div id="emailError"></div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+            <div id="passwordError"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script>
+        const form=document.getElementById("frm");
+        const bnCodeError=document.getElementById("bnCodeError");
+        const bnNameError=document.getElementById("bnNameError");
+        const emailError=document.getElementById("emailError");
+        const passwordError=document.getElementById("passwordError");
+        form.addEventListener('submit',async(eventObj)=>
+        {
+              eventObj.preventDefault();
+              const bnCode=form.bnCode.value;
+              const bnName=form.bnName.value;
+              const email=form.email.value;
+              const password=form.password.value;
+            
+            try{
+              const result=await fetch('/signup',{
+                method:'POST',
+                body:JSON.stringify({bnCode:bnCode,bnName:bnName,email:email,password:password}),
+                headers:{'Content-Type' : 'application/json'}
+              });
+              const data=await result.json();
+              if (data.err){
+                bnCodeError.textContent=data.err.bnCode;
+                bnNameError.textContent=data.err.bnName;
+                emailError.textContent=data.err.email;
+                passwordError.textContent=data.err.password;
+
+              }
+              if(data.user){
+                location.assign('/login');
+              }
+            }
+            catch(error)
+            {
+              console.log(error);
+            }
+        });
+    </script>
+  </body>
+</html>
+
+

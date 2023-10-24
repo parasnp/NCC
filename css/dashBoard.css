@@ -1,0 +1,58 @@
+body{
+  font-family:'Cormorant Garamond', serif;
+}
+header{
+  text-align: center;
+ margin: 1em;
+}
+h1{
+  color: rgba(255, 217, 0, 0.819);
+  font-size: 1.5em;
+}
+h2{
+  color: #ffffff;
+  font-size: 1.2em;
+}
+
+.grid-container {
+margin: 1em;
+display: grid;
+grid-template-columns: 1fr 2fr 1fr;
+grid-gap: 10px; /* Optional gap between grid items */
+}
+.column-1, .column-3 {
+display: grid;
+grid-template-rows: repeat(3, 1fr);
+text-align: center;
+color: #ffffff;        
+}
+.column-2 {
+display: flex; /* To make the image fill its container */
+align-items: center; /* To center the image vertically */
+justify-content: center; /* To center the image horizontally */
+}
+.row {
+border: 1px solid #000;
+padding: 10px;
+margin: 10px;
+text-align: center;       
+}
+a{
+background-color: #303097;
+color: #ffffff;
+text-decoration: none; 
+padding: 1em;       
+text-align: center;        
+border: 2px solid #303097;
+border-radius: 20px 20px;          
+}
+a:hover {
+color: #FF5733; /* Change text color */       
+background-color: #EDEDED; /* Change background color */
+transform: scale(1.1); /* Scale the element up by 10% */
+transition: all 0.3s ease; /* Add a smooth transition */
+}
+img {
+max-width: 100%; /* Ensure the image doesn't exceed its container */
+max-height: 100%;
+}

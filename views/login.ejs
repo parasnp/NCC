@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/login.css">
+  </head>
+  <body>
+    <div class="bg-image"></div>
+    <div class="bg-text">
+      <form id="frm" class="frm">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email">
+          <div id="emailError"></div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password">
+          <div id="passwordError"></div>
+        </div>
+        <button type="submit"  id="login-submit-button">Submit</button>
+      </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script>
+      const form=document.getElementById("frm");
+      const emailError=document.getElementById("emailError");
+      const passwordError=document.getElementById("passwordError");
+      form.addEventListener('submit',async(e)=>{
+        e.preventDefault();
+        emailError.textContent='';
+        passwordError.textContent='';
+        const email=form.email.value;
+        const password=form.password.value;
+        try
+        {
+          const result=await fetch('/login',
+          {
+                method:'POST',
+                body:JSON.stringify({email:email,password:password}),
+                headers:{'Content-Type' : 'application/json'}
+          });
+          const data = await result.json();
+          if(data.err){
+            emailError.textContent=data.err.email;
+            passwordError.textContent=data.err.password;
+          }
+          if(data.user)
+          {
+            location.assign('/dashBoard');
+          }
+        }
+        catch(err){
+          console.log(err);
+        }
+      });
+    </script>
+  </body>
+</html>

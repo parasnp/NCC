@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>    
+         
+    
+    <diV class="container-fluid" style="padding: 1rem;">
+        <div class="row">
+            <div class="col 6">
+                <h1>Image gallerys</h1>
+            </div>
+            <div class="col 4" style="text-align: center;">
+                <a class="btn btn-primary" href="/addToGallery">Add Image</a>
+            </div>
+        </div>
+        <div style="display: grid; grid-template-columns: auto auto auto auto;padding: 10px;">
+            <% for(let el of gallObj){%>
+                <div class="card" style="width: 18rem;">
+                    <img src="<%= el.imgUrl %>" class="card-img-top" alt="..."/>
+    
+                    <div class="card-body">
+                      <p class="card-text"><%= el.description %></p>
+                        <div style="display: grid; grid-template-columns: auto auto;text-align: center;">
+                        <div>
+                          <a href="/editGalleryImage/<%= el._id %>" class="btn btn-primary">Edit</a>
+
+                        </div>
+                        <div>
+                          <form action="/deleteGalleryImage" method="post" >
+                          <input type="hidden" value="<%= el._id %>" name="imageId">
+                            <button type="submit" class="btn btn-primary">Delete</button>                            
+                          </form>
+                        </div>
+                      </div>             
+                    </div>
+                  </div>
+            <%}%>
+    
+        </div>       
+    </diV>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

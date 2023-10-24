@@ -1,0 +1,44 @@
+body, html {
+    height: 100%;
+  }
+.frm
+{
+    padding: 2%;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: center;
+}
+#login-submit-button
+{
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+    margin-top: 3%;
+    color: white;
+    text-align: center;
+}
+.bg-image
+{
+    background-image: url("../images/ncc-bg.jpg");
+    height: 100%;
+    filter: blur(3px);
+   -webkit-filter: blur(8px);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.7); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 50%;
+    padding: 20px;
+    text-align: center;
+  }
